@@ -1,5 +1,5 @@
 document.getElementById('send-button').addEventListener('click', async function() {
-    const userInput = document.getElementById('user-input');
+    const userInput = document.getElementById('user-input').value;
     const responseOutput = document.getElementById('response-output');
 
     if (!userInput) {
@@ -14,11 +14,16 @@ document.getElementById('send-button').addEventListener('click', async function(
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer t1.9euelZrPjp6WlJOdj5nHmI2Oz4uPnO3rnpWansmOzImTlpqajJGRnpSQyJDl8_cVb11G-e88KC5k_d3z91UdW0b57zwoLmT9zef1656Vmp2cnZ7Ny5jMyJvGxsbIlIqL7_zF656Vmp2cnZ7Ny5jMyJvGxsbIlIqL.zpQs6dF9UD8zhLBNzO1bKpxNqup90NYIKFSGelu_oAhgGYqeWCZvUq7YB-6J0KmH3D4nab6stYxgA51qI3WyAg' // Замените на свой ключ API
+                'Authorization': 'Bearer t1.9euelZrPjp6WlJOdj5nHmI2Oz4uPnO3rnpWansmOzImTlpqajJGRnpSQyJDl8_cVb11G-e88KC5k_d3z91UdW0b57zwoLmT9zef1656Vmp2cnZ7Ny5jMyJvGxsbIlIqL7_zF656Vmp2cnZ7Ny5jMyJvGxsbIlIqL.zpQs6dF9UD8zhLBNzO1bKpxNqup90NYIKFSGelu_oAhgGYqeWCZvUq7YB-6J0KmH3D4nab6stYxgA51qI3WyAg'
             },
             body: JSON.stringify({
-                modelURI: 'gpt://b1g7vpmtqcnr8bnvskvr/yandexgpt-lite', // Убедитесь, что используете правильную модель
-                messages: [{ role: 'user', content: userInput }]
+                modelUri: 'gpt://b1g7vpmtqcnr8bnvskvr/yandexgpt-lite',
+                messages: [{ role: 'system', content: 'Модель противоречий' }, { role: 'user', content: userInput }],
+		completionOptions: {
+		stream: false,
+		temperature: 0.5,
+		maxTokens: 1000
+		}
             })
         });
 
